@@ -14,20 +14,25 @@ function findLargestNumber(query: string): string {
 }
 
 function calculateExpression(query: string): string {
-    // Step 1: Extract numbers and the operator from the query using a regular expression
-    const match = query.match(/(\d+)\s+plus\s+(\d+)/i); // Match "<number> plus <number>"
+    // Step 1: Match the query for different operators
+    const multiplyMatch = query.match(/(\d+)\s+multiplied\s+by\s+(\d+)/i); // Match "<number> multiplied by <number>"
+    const plusMatch = query.match(/(\d+)\s+plus\s+(\d+)/i); // Match "<number> plus <number>"
 
-    if (!match) return "Invalid query format."; // Handle invalid query
+    // Step 2: Check which operation to perform
+    if (multiplyMatch) {
+        const num1 = Number(multiplyMatch[1]);
+        const num2 = Number(multiplyMatch[2]);
+        const result = num1 * num2; // Perform multiplication
+        return `${result}`;
+    } else if (plusMatch) {
+        const num1 = Number(plusMatch[1]);
+        const num2 = Number(plusMatch[2]);
+        const result = num1 + num2; // Perform addition
+        return `${result}`;
+    }
 
-    // Step 2: Extract the numbers
-    const num1 = Number(match[1]);
-    const num2 = Number(match[2]);
-
-    // Step 3: Perform the calculation
-    const result = num1 + num2;
-
-    // Step 4: Return the result as a string
-    return `${result}`;
+    // Step 3: If no match, return an error message
+    return "Invalid query format.";
 }
 
 export default function QueryProcessor(query: string): string {
@@ -52,6 +57,9 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("plus")) {
+    return calculateExpression(query);
+  }
+  if (query.toLowerCase().includes("multiplied")) {
     return calculateExpression(query);
   }
 

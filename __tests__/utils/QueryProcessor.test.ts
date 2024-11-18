@@ -58,5 +58,13 @@ describe("QueryProcessor", () => {
     	));
     });
 
+     test('should return largest num', () => {
+        const query = "What is 3 multiplied by 48??";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"144"
+    	));
+    });
+
 
 });
