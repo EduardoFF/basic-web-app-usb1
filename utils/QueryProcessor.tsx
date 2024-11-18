@@ -1,15 +1,15 @@
-function findLargestNumber(query) {
+function findLargestNumber(query: string): string {
     // Step 1: Extract numbers from the query using a regular expression
-    let numbers = query.match(/\d+/g); // This extracts all numbers as strings
+    const numbers = query.match(/\d+/g); // This extracts all numbers as strings
     if (!numbers) return "No numbers found in the query."; // Handle edge case
 
     // Step 2: Convert strings to numbers
-    numbers = numbers.map(Number);
+    const numericNumbers = numbers.map(Number);
 
     // Step 3: Find the largest number using Math.max()
-    let largestNumber = Math.max(...numbers);
+    const largestNumber = Math.max(...numericNumbers);
 
-    // Step 4: Return the largest number
+    // Step 4: Return the result as a string
     return `${largestNumber}`;
 }
 
