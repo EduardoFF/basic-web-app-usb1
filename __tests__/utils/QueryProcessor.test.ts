@@ -66,5 +66,13 @@ describe("QueryProcessor", () => {
     	));
     });
 
+     test('should return largest num', () => {
+        const query = "What is 24 minus 24?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"0"
+    	));
+    });
+
 
 });

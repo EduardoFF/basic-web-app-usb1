@@ -17,6 +17,7 @@ function calculateExpression(query: string): string {
     // Step 1: Match the query for different operators
     const multiplyMatch = query.match(/(\d+)\s+multiplied\s+by\s+(\d+)/i); // Match "<number> multiplied by <number>"
     const plusMatch = query.match(/(\d+)\s+plus\s+(\d+)/i); // Match "<number> plus <number>"
+    const minusMatch = query.match(/(\d+)\s+minus\s+(\d+)/i); // Match "<number> minus <number>"
 
     // Step 2: Check which operation to perform
     if (multiplyMatch) {
@@ -29,11 +30,14 @@ function calculateExpression(query: string): string {
         const num2 = Number(plusMatch[2]);
         const result = num1 + num2; // Perform addition
         return `${result}`;
+    } else if (minusMatch) {
+        const num1 = Number(minusMatch[1]);
+        const num2 = Number(minusMatch[2]);
+        const result = num1 - num2; // Perform subtraction
+        return `${result}`;
     }
-
-    // Step 3: If no match, return an error message
-    return "Invalid query format.";
 }
+
 
 export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("shakespeare")) {
@@ -60,6 +64,10 @@ export default function QueryProcessor(query: string): string {
     return calculateExpression(query);
   }
   if (query.toLowerCase().includes("multiplied")) {
+    return calculateExpression(query);
+  }
+
+  if (query.toLowerCase().includes("minus")) {
     return calculateExpression(query);
   }
 
