@@ -13,6 +13,23 @@ function findLargestNumber(query: string): string {
     return `${largestNumber}`;
 }
 
+function calculateExpression(query: string): string {
+    // Step 1: Extract numbers and the operator from the query using a regular expression
+    const match = query.match(/(\d+)\s+plus\s+(\d+)/i); // Match "<number> plus <number>"
+
+    if (!match) return "Invalid query format."; // Handle invalid query
+
+    // Step 2: Extract the numbers
+    const num1 = Number(match[1]);
+    const num2 = Number(match[2]);
+
+    // Step 3: Perform the calculation
+    const result = num1 + num2;
+
+    // Step 4: Return the result as a string
+    return `${result}`;
+}
+
 export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("shakespeare")) {
     return (
@@ -32,6 +49,10 @@ export default function QueryProcessor(query: string): string {
 
   if (query.toLowerCase().includes("largest")) {
     return findLargestNumber(query);
+  }
+
+  if (query.toLowerCase().includes("plus")) {
+    return calculateExpression(query);
   }
 
 

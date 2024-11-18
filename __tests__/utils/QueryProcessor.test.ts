@@ -54,7 +54,7 @@ describe("QueryProcessor", () => {
         const query = "What is 76 plus 40?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
-		"3040"
+		"116"
     	));
     });
 
